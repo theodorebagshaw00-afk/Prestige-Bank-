@@ -1576,18 +1576,15 @@
           </div>
           <div class="form-group">
             <label>Password</label>
-            <input
-              type="password"
-              id="loginPassword"
-              value="password123"
-              required
-            />
+            <input type="password" id="loginPassword" value="" required />
           </div>
           <button type="submit" class="btn-full">Sign In</button>
-          <p class="auth-hint">Demo: theodorebagshaw / password123</p>
+          <!-- <p class="auth-hint">Demo: theodorebagshaw / password123</p> -->
           <p class="auth-switch">
             Don't have an account? <a onclick="switchAuth('signup')">Sign Up</a>
+             <p class="auth-switch">Customer Support: <a href="mailto:prestigebank@gmail.com">prestigebankcustomer@gmail.com</a></p>
           </p>
+        
         </form>
       </div>
 
@@ -1954,7 +1951,7 @@
           showToast("Welcome back, Theodore!", "success");
           renderDashboard();
         } else {
-          showToast("Invalid credentials. Try theodorebagshaw / password123");
+          showToast("Invalid credentials.");
         }
       }
 
