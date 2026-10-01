@@ -1,0 +1,2395 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prestige Bank - Secure Banking</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #1a3a5c;
+        --primary-light: #2a5a8c;
+        --accent: #d4a843;
+        --accent-hover: #c49a3a;
+        --bg: #f5f7fa;
+        --card: #ffffff;
+        --text: #1f2937;
+        --text-light: #6b7280;
+        --border: #e5e7eb;
+        --success: #10b981;
+        --danger: #ef4444;
+        --sidebar-bg: #0f2744;
+        --sidebar-hover: #1a3a5c;
+        --shadow:
+          0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        --shadow-lg: 0 10px 30px rgba(26, 58, 92, 0.15);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family:
+          "Inter",
+          system-ui,
+          -apple-system,
+          sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.5;
+        overflow-x: hidden;
+      }
+
+      /* ===== LANDING PAGE ===== */
+      .landing-page {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      .landing-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 48px;
+        transition: all 0.3s;
+      }
+      .landing-nav.scrolled {
+        background: rgba(15, 39, 68, 0.95);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+      .landing-nav .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: #fff;
+        font-size: 22px;
+        font-weight: 800;
+        text-decoration: none;
+      }
+      .landing-nav .nav-brand .brand-icon {
+        width: 40px;
+        height: 40px;
+        background: var(--accent);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        color: var(--sidebar-bg);
+      }
+      .landing-nav .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+      }
+      .landing-nav .nav-links a {
+        color: rgba(255, 255, 255, 0.85);
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 500;
+        transition: color 0.2s;
+      }
+      .landing-nav .nav-links a:hover {
+        color: #fff;
+      }
+      .landing-nav .nav-cta {
+        display: flex;
+        gap: 12px;
+      }
+      .landing-nav .nav-cta button {
+        padding: 10px 22px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        border: none;
+        transition: all 0.2s;
+      }
+      .landing-nav .nav-cta .btn-signin {
+        background: transparent;
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+      .landing-nav .nav-cta .btn-signin:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+      .landing-nav .nav-cta .btn-signup {
+        background: var(--accent);
+        color: var(--sidebar-bg);
+      }
+      .landing-nav .nav-cta .btn-signup:hover {
+        background: var(--accent-hover);
+        transform: translateY(-1px);
+      }
+
+      .landing-hero {
+        position: relative;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      .landing-hero-bg {
+        position: absolute;
+        inset: 0;
+        background: url("https://kimi-web-img.kimi.ai/img/img.freepik.com/13f821fee9923382604447a6033cb67f520b1120.jpg")
+          center/cover no-repeat;
+      }
+      .landing-hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(15, 39, 68, 0.92),
+          rgba(26, 58, 92, 0.88)
+        );
+      }
+      .landing-hero-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        max-width: 800px;
+        padding: 120px 24px 80px;
+        color: #fff;
+      }
+      .landing-hero-content h1 {
+        font-size: 4rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        letter-spacing: -0.03em;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      }
+      .landing-hero-content p {
+        font-size: 1.25rem;
+        color: rgba(255, 255, 255, 0.85);
+        margin-bottom: 2.5rem;
+        line-height: 1.7;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .hero-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .hero-buttons .btn-primary {
+        background: var(--accent);
+        color: var(--sidebar-bg);
+        border: none;
+        padding: 14px 32px;
+        border-radius: 12px;
+        font-size: 1.05rem;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 4px 20px rgba(212, 168, 67, 0.4);
+        transition: all 0.3s;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .hero-buttons .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(212, 168, 67, 0.5);
+      }
+      .hero-buttons .btn-secondary {
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        padding: 14px 32px;
+        border-radius: 12px;
+        font-size: 1.05rem;
+        font-weight: 600;
+        cursor: pointer;
+        backdrop-filter: blur(8px);
+        transition: all 0.3s;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .hero-buttons .btn-secondary:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+      }
+      .scroll-indicator {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 13px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+        animation: bounce 2s infinite;
+      }
+      @keyframes bounce {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateX(-50%) translateY(0);
+        }
+        40% {
+          transform: translateX(-50%) translateY(-10px);
+        }
+        60% {
+          transform: translateX(-50%) translateY(-5px);
+        }
+      }
+
+      .about-section {
+        padding: 100px 48px;
+        background: var(--bg);
+      }
+      .about-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .about-header {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+      .about-header h2 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--primary);
+        margin-bottom: 12px;
+      }
+      .about-header p {
+        color: var(--text-light);
+        font-size: 1.1rem;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      .about-divider {
+        width: 60px;
+        height: 4px;
+        background: var(--accent);
+        border-radius: 2px;
+        margin: 16px auto 0;
+      }
+      .about-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+      }
+      .about-card {
+        background: var(--card);
+        border-radius: 20px;
+        padding: 36px 28px;
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+        transition: all 0.3s;
+        text-align: center;
+      }
+      .about-card:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-lg);
+        border-color: rgba(26, 58, 92, 0.15);
+      }
+      .about-card .icon-wrap {
+        width: 64px;
+        height: 64px;
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        font-size: 28px;
+      }
+      .about-card:nth-child(1) .icon-wrap {
+        background: #eff6ff;
+      }
+      .about-card:nth-child(2) .icon-wrap {
+        background: #ecfdf5;
+      }
+      .about-card:nth-child(3) .icon-wrap {
+        background: #fffbeb;
+      }
+      .about-card h3 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: var(--text);
+      }
+      .about-card p {
+        color: var(--text-light);
+        font-size: 0.95rem;
+        line-height: 1.65;
+      }
+      .stats-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+        margin-top: 60px;
+        text-align: center;
+      }
+      .stat-box {
+        background: var(--card);
+        border-radius: 16px;
+        padding: 32px 20px;
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+      }
+      .stat-box .stat-num {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--primary);
+      }
+      .stat-box .stat-label {
+        color: var(--text-light);
+        font-size: 0.9rem;
+        margin-top: 6px;
+      }
+
+      .landing-footer {
+        background: var(--sidebar-bg);
+        color: rgba(255, 255, 255, 0.6);
+        padding: 40px 48px;
+        text-align: center;
+        font-size: 0.9rem;
+      }
+      .landing-footer a {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        margin: 0 12px;
+      }
+      .landing-footer a:hover {
+        color: #fff;
+      }
+
+      /* ===== AUTH OVERLAYS ===== */
+      .auth-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        background: linear-gradient(
+          135deg,
+          rgba(15, 39, 68, 0.95),
+          rgba(26, 58, 92, 0.92)
+        );
+        display: none;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(8px);
+      }
+      .auth-overlay.active {
+        display: flex;
+      }
+      .auth-box {
+        background: var(--card);
+        border-radius: 20px;
+        padding: 40px;
+        width: 90%;
+        max-width: 440px;
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+        animation: slideUp 0.5s ease;
+        position: relative;
+      }
+      .auth-close {
+        position: absolute;
+        top: 16px;
+        right: 20px;
+        background: none;
+        border: none;
+        font-size: 24px;
+        color: var(--text-light);
+        cursor: pointer;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+      }
+      .auth-close:hover {
+        background: var(--bg);
+        color: var(--text);
+      }
+      .auth-brand {
+        text-align: center;
+        margin-bottom: 28px;
+      }
+      .auth-logo {
+        width: 56px;
+        height: 56px;
+        background: var(--accent);
+        border-radius: 14px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        font-weight: 800;
+        color: var(--sidebar-bg);
+        margin-bottom: 12px;
+      }
+      .auth-brand h2 {
+        font-size: 22px;
+        font-weight: 800;
+        color: var(--text);
+      }
+      .auth-brand p {
+        color: var(--text-light);
+        font-size: 14px;
+        margin-top: 4px;
+      }
+      .auth-form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .auth-form .form-group label {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text);
+        margin-bottom: 6px;
+        display: block;
+      }
+      .auth-form .form-group input,
+      .auth-form .form-group select {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        font-size: 14px;
+        outline: none;
+        transition: all 0.2s;
+        background: var(--card);
+        font-family: inherit;
+      }
+      .auth-form .form-group input:focus,
+      .auth-form .form-group select:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(26, 58, 92, 0.08);
+      }
+      .auth-form .btn-full {
+        width: 100%;
+        padding: 14px;
+        font-size: 15px;
+        font-weight: 700;
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .auth-form .btn-full:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+      }
+      .auth-switch {
+        text-align: center;
+        margin-top: 16px;
+        font-size: 13px;
+        color: var(--text-light);
+      }
+      .auth-switch a {
+        color: var(--primary);
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .auth-switch a:hover {
+        text-decoration: underline;
+      }
+      .auth-hint {
+        text-align: center;
+        font-size: 12px;
+        color: var(--text-light);
+        margin-top: 12px;
+      }
+
+      /* ===== APP LAYOUT ===== */
+      .app {
+        display: none;
+        min-height: 100vh;
+      }
+      .app.active {
+        display: flex;
+      }
+      .sidebar {
+        width: 260px;
+        background: var(--sidebar-bg);
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s;
+      }
+      .sidebar-brand {
+        padding: 24px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .brand-icon {
+        width: 40px;
+        height: 40px;
+        background: var(--accent);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        font-weight: 800;
+        color: var(--sidebar-bg);
+      }
+      .brand-text {
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+      }
+      .sidebar-nav {
+        flex: 1;
+        padding: 16px 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .nav-item {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 12px 14px;
+        border-radius: 10px;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.2s;
+      }
+      .nav-item:hover {
+        background: var(--sidebar-hover);
+        color: #fff;
+      }
+      .nav-item.active {
+        background: var(--primary-light);
+        color: #fff;
+      }
+      .nav-item svg {
+        flex-shrink: 0;
+      }
+      .sidebar-footer {
+        padding: 16px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .user-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-light)
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-weight: 700;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      .user-info .user-name {
+        font-weight: 600;
+        font-size: 13px;
+      }
+      .user-info .user-tier {
+        font-size: 11px;
+        opacity: 0.6;
+      }
+
+      .main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+      .topbar {
+        height: 70px;
+        background: var(--card);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 28px;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+      .topbar-left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .menu-toggle {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 8px;
+        color: var(--text);
+      }
+      .menu-toggle:hover {
+        background: var(--bg);
+      }
+      .page-title {
+        font-size: 22px;
+        font-weight: 700;
+      }
+      .topbar-right {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .search-box {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--bg);
+        padding: 8px 14px;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        width: 280px;
+      }
+      .search-box input {
+        border: none;
+        background: none;
+        outline: none;
+        font-size: 14px;
+        width: 100%;
+      }
+      .icon-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        background: var(--card);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.2s;
+        color: var(--text);
+      }
+      .icon-btn:hover {
+        background: var(--bg);
+      }
+      .badge {
+        position: absolute;
+        top: -2px;
+        right: -2px;
+        width: 18px;
+        height: 18px;
+        background: var(--danger);
+        color: #fff;
+        font-size: 10px;
+        font-weight: 700;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid var(--card);
+      }
+      .content {
+        flex: 1;
+        padding: 28px;
+        overflow-y: auto;
+      }
+
+      .btn {
+        padding: 10px 18px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        border: 1px solid var(--border);
+        background: var(--card);
+        color: var(--text);
+        transition: all 0.2s;
+      }
+      .btn:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+      }
+      .btn-primary {
+        background: var(--primary);
+        color: #fff;
+        border-color: var(--primary);
+      }
+      .btn-full {
+        width: 100%;
+        padding: 14px;
+        font-size: 15px;
+      }
+      .btn-danger {
+        background: var(--danger);
+        color: #fff;
+        border-color: var(--danger);
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .form-group label {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text);
+      }
+      .form-group input,
+      .form-group select {
+        padding: 12px 14px;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        font-size: 14px;
+        outline: none;
+        transition: all 0.2s;
+        background: var(--card);
+        font-family: inherit;
+      }
+      .form-group input:focus,
+      .form-group select:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(26, 58, 92, 0.08);
+      }
+
+      .section {
+        background: var(--card);
+        border-radius: 16px;
+        border: 1px solid var(--border);
+        overflow: hidden;
+        box-shadow: var(--shadow);
+      }
+      .section-header {
+        padding: 20px 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid var(--border);
+      }
+      .section-header h3 {
+        font-size: 16px;
+        font-weight: 700;
+      }
+
+      .dashboard {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+      }
+      .cards-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+      .balance-card {
+        background: linear-gradient(
+          135deg,
+          var(--primary),
+          var(--primary-light)
+        );
+        border-radius: 16px;
+        padding: 24px;
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+        box-shadow: var(--shadow-lg);
+      }
+      .balance-card::after {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -30%;
+        width: 200px;
+        height: 200px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+      }
+      .balance-card .label {
+        font-size: 13px;
+        opacity: 0.8;
+        margin-bottom: 8px;
+      }
+      .balance-card .amount {
+        font-size: 32px;
+        font-weight: 800;
+        letter-spacing: -1px;
+      }
+      .balance-card .change {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        margin-top: 12px;
+        font-size: 13px;
+        background: rgba(255, 255, 255, 0.15);
+        padding: 4px 10px;
+        border-radius: 20px;
+      }
+      .balance-card .card-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+        font-size: 12px;
+        opacity: 0.7;
+      }
+
+      .stat-card {
+        background: var(--card);
+        border-radius: 16px;
+        padding: 24px;
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .stat-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .stat-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+      }
+      .stat-icon.green {
+        background: #ecfdf5;
+        color: var(--success);
+      }
+      .stat-icon.red {
+        background: #fef2f2;
+        color: var(--danger);
+      }
+      .stat-icon.gold {
+        background: #fffbeb;
+        color: var(--accent-hover);
+      }
+      .stat-label {
+        font-size: 13px;
+        color: var(--text-light);
+      }
+      .stat-value {
+        font-size: 26px;
+        font-weight: 800;
+        color: var(--text);
+      }
+      .stat-change {
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .stat-change.up {
+        color: var(--success);
+      }
+      .stat-change.down {
+        color: var(--danger);
+      }
+
+      .hero-banner {
+        position: relative;
+        border-radius: 16px;
+        overflow: hidden;
+        height: 220px;
+        background: url("https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&q=80")
+          center/cover no-repeat;
+        display: flex;
+        align-items: center;
+        padding: 0 40px;
+        box-shadow: var(--shadow-lg);
+      }
+      .hero-banner::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          90deg,
+          rgba(15, 39, 68, 0.9) 0%,
+          rgba(15, 39, 68, 0.6) 60%,
+          transparent 100%
+        );
+      }
+      .hero-content {
+        position: relative;
+        z-index: 2;
+        color: #fff;
+        max-width: 500px;
+      }
+      .hero-content h2 {
+        font-size: 28px;
+        font-weight: 800;
+        margin-bottom: 8px;
+      }
+      .hero-content p {
+        font-size: 15px;
+        opacity: 0.9;
+        margin-bottom: 16px;
+      }
+      .hero-content .btn {
+        background: var(--accent);
+        color: var(--sidebar-bg);
+        border: none;
+        font-weight: 700;
+      }
+
+      .quick-actions {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+      .action-btn {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+        color: var(--text);
+      }
+      .action-btn:hover {
+        border-color: var(--primary);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+      }
+      .action-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+      }
+
+      .data-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .data-table th {
+        text-align: left;
+        padding: 14px 24px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-light);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        background: var(--bg);
+      }
+      .data-table td {
+        padding: 16px 24px;
+        font-size: 14px;
+        border-bottom: 1px solid var(--border);
+      }
+      .data-table tr:last-child td {
+        border-bottom: none;
+      }
+      .data-table tr:hover td {
+        background: var(--bg);
+      }
+
+      .tx-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        flex-shrink: 0;
+      }
+      .tx-icon.income {
+        background: #ecfdf5;
+        color: var(--success);
+      }
+      .tx-icon.expense {
+        background: #fef2f2;
+        color: var(--danger);
+      }
+      .tx-icon.transfer {
+        background: #eff6ff;
+        color: #3b82f6;
+      }
+      .tx-name {
+        font-weight: 600;
+        color: var(--text);
+      }
+      .tx-desc {
+        font-size: 12px;
+        color: var(--text-light);
+      }
+      .tx-amount {
+        font-weight: 700;
+        font-size: 14px;
+      }
+      .tx-amount.income {
+        color: var(--success);
+      }
+      .tx-amount.expense {
+        color: var(--danger);
+      }
+      .status {
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .status.completed {
+        background: #ecfdf5;
+        color: var(--success);
+      }
+      .status.pending {
+        background: #fef3c7;
+        color: #d97706;
+      }
+
+      .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+      .credit-card {
+        border-radius: 16px;
+        padding: 24px;
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: var(--shadow-lg);
+      }
+      .credit-card.gold {
+        background: linear-gradient(135deg, #d4a843, #b8942e);
+      }
+      .credit-card.platinum {
+        background: linear-gradient(135deg, #374151, #1f2937);
+      }
+      .credit-card .card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+      }
+      .credit-card .chip {
+        width: 40px;
+        height: 30px;
+        background: linear-gradient(135deg, #fbbf24, #d97706);
+        border-radius: 6px;
+      }
+      .credit-card .card-type {
+        font-size: 20px;
+        font-weight: 800;
+        letter-spacing: 2px;
+      }
+      .credit-card .card-number {
+        font-size: 20px;
+        letter-spacing: 3px;
+        font-family: monospace;
+      }
+      .credit-card .card-bottom {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        opacity: 0.8;
+      }
+
+      .settings-list {
+        padding: 8px 0;
+      }
+      .setting-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 16px 24px;
+        border-bottom: 1px solid var(--border);
+      }
+      .setting-item:last-child {
+        border-bottom: none;
+      }
+      .setting-item.clickable {
+        cursor: pointer;
+      }
+      .setting-item.clickable:hover {
+        background: var(--bg);
+      }
+      .setting-info h4 {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--text);
+      }
+      .setting-info p {
+        font-size: 13px;
+        color: var(--text-light);
+        margin-top: 2px;
+      }
+      .toggle {
+        width: 44px;
+        height: 24px;
+        background: var(--border);
+        border-radius: 12px;
+        position: relative;
+        cursor: pointer;
+        transition: all 0.3s;
+        flex-shrink: 0;
+      }
+      .toggle.on {
+        background: var(--success);
+      }
+      .toggle::after {
+        content: "";
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 20px;
+        height: 20px;
+        background: #fff;
+        border-radius: 50%;
+        transition: all 0.3s;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      }
+      .toggle.on::after {
+        left: 22px;
+      }
+
+      .toast {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        background: var(--text);
+        color: #fff;
+        padding: 14px 20px;
+        border-radius: 12px;
+        font-size: 14px;
+        font-weight: 500;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        transform: translateY(100px);
+        opacity: 0;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        z-index: 300;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .toast.show {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      .toast.success {
+        background: var(--success);
+      }
+
+      .inactive-banner {
+        background: #fef2f2;
+        border: 1px solid #fecaca;
+        border-left: 4px solid var(--danger);
+        border-radius: 12px;
+        padding: 14px 18px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: #991b1b;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .inactive-banner .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--danger);
+        animation: pulse 1.5s infinite;
+        flex-shrink: 0;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.3;
+        }
+      }
+      .form-group input:disabled,
+      .form-group select:disabled {
+        background: var(--bg);
+        color: var(--text-light);
+        cursor: not-allowed;
+        opacity: 0.7;
+      }
+      .btn-disabled {
+        background: var(--border) !important;
+        color: var(--text-light) !important;
+        border-color: var(--border) !important;
+        cursor: not-allowed !important;
+      }
+      .btn-disabled:hover {
+        transform: none !important;
+        opacity: 0.7 !important;
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      .animate-in {
+        animation: fadeIn 0.4s ease;
+      }
+
+      @media (max-width: 1024px) {
+        .about-grid {
+          grid-template-columns: 1fr;
+        }
+        .stats-row {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .cards-row {
+          grid-template-columns: 1fr;
+        }
+        .cards-grid {
+          grid-template-columns: 1fr;
+        }
+        .quick-actions {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .hero-content h2 {
+          font-size: 22px;
+        }
+        .landing-hero-content h1 {
+          font-size: 2.5rem;
+        }
+        .landing-nav {
+          padding: 16px 24px;
+        }
+        .landing-nav .nav-links {
+          display: none;
+        }
+      }
+      @media (max-width: 768px) {
+        .sidebar {
+          position: fixed;
+          z-index: 100;
+          height: 100vh;
+          transform: translateX(-100%);
+        }
+        .sidebar.open {
+          transform: translateX(0);
+        }
+        .menu-toggle {
+          display: block;
+        }
+        .search-box {
+          display: none;
+        }
+        .content {
+          padding: 16px;
+        }
+        .hero-banner {
+          height: 180px;
+          padding: 0 20px;
+        }
+        .hero-content h2 {
+          font-size: 18px;
+        }
+        .stats-row {
+          grid-template-columns: 1fr;
+        }
+        .about-section {
+          padding: 60px 24px;
+        }
+        .landing-hero-content h1 {
+          font-size: 2rem;
+        }
+      }
+    </style>
+    <base target="_blank" />
+    <base target="_blank" />
+  </head>
+  <body>
+    <!-- ===== LANDING PAGE ===== -->
+    <div class="landing-page" id="landingPage">
+      <nav class="landing-nav" id="landingNav">
+        <a
+          href="javascript:void(0)"
+          class="nav-brand"
+          onclick="
+            event.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          "
+        >
+          <div class="brand-icon">PB</div>
+          <span>Prestige Bank</span>
+        </a>
+        <div class="nav-links">
+          <a
+            href="#about"
+            onclick="
+              event.preventDefault();
+              document
+                .getElementById('about')
+                .scrollIntoView({ behavior: 'smooth' });
+            "
+            >About</a
+          >
+          <a href="javascript:void(0)" onclick="showAuth('login')">Services</a>
+          <a href="javascript:void(0)" onclick="showAuth('login')">Support</a>
+        </div>
+        <div class="nav-cta">
+          <button class="btn-signin" onclick="showAuth('login')">
+            Sign In
+          </button>
+          <button class="btn-signup" onclick="showAuth('signup')">
+            Sign Up
+          </button>
+        </div>
+      </nav>
+
+      <section class="landing-hero">
+        <div class="landing-hero-bg"></div>
+        <div class="landing-hero-overlay"></div>
+        <div class="landing-hero-content">
+          <h1>Banking Built for You</h1>
+          <p>
+            Your trusted financial partner for over 50 years. Secure banking,
+            personalized service, and a commitment to your prosperity — all in
+            one place.
+          </p>
+          <div class="hero-buttons">
+            <button class="btn-primary" onclick="showAuth('signup')">
+              <svg
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
+                />
+                <circle cx="9" cy="7" r="4" />
+                <line x1="19" y1="8" x2="19" y2="14" />
+                <line x1="22" y1="11" x2="16" y2="11" />
+              </svg>
+              Get Started
+            </button>
+            <button class="btn-secondary" onclick="showAuth('login')">
+              <svg
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"
+                />
+                <polyline points="10 17 15 12 10 7" />
+                <line x1="15" y1="12" x2="3" y2="12" />
+              </svg>
+              Sign In
+            </button>
+          </div>
+        </div>
+        <div class="scroll-indicator">
+          <span>Scroll to learn more</span>
+          <svg
+            width="20"
+            height="20"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M19 14l-7 7m0 0l-7-7m7 7V3"
+            />
+          </svg>
+        </div>
+      </section>
+
+      <section class="about-section" id="about">
+        <div class="about-container">
+          <div class="about-header">
+            <h2>About Prestige Bank</h2>
+            <div class="about-divider"></div>
+            <p>
+              We have been empowering individuals and businesses with secure,
+              innovative financial solutions since 1976.
+            </p>
+          </div>
+          <div class="about-grid">
+            <div class="about-card">
+              <div class="icon-wrap">🌍</div>
+              <h3>Global Reach</h3>
+              <p>
+                Serving customers across 45 countries with over 2,000 branches
+                worldwide. Your money moves with you, wherever life takes you.
+              </p>
+            </div>
+            <div class="about-card">
+              <div class="icon-wrap">🔒</div>
+              <h3>Bank-Grade Security</h3>
+              <p>
+                Protected by 256-bit AES encryption, biometric authentication,
+                and real-time fraud monitoring. Your assets are always safe.
+              </p>
+            </div>
+            <div class="about-card">
+              <div class="icon-wrap">🤝</div>
+              <h3>Personalized Service</h3>
+              <p>
+                Dedicated relationship managers and 24/7 customer support. We
+                believe banking should feel personal, not transactional.
+              </p>
+            </div>
+          </div>
+          <div class="stats-row">
+            <div class="stat-box">
+              <div class="stat-num">50+</div>
+              <div class="stat-label">Years of Trust</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num">2M+</div>
+              <div class="stat-label">Happy Customers</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num">$50B</div>
+              <div class="stat-label">Assets Managed</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num">45</div>
+              <div class="stat-label">Countries Served</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="landing-footer">
+        <p>
+          © 2026 Prestige Bank. All rights reserved. |
+          <a
+            href="javascript:void(0)"
+            onclick="
+              event.preventDefault();
+              showToast('Privacy Policy coming soon');
+            "
+            >Privacy Policy</a
+          >
+          |
+          <a
+            href="javascript:void(0)"
+            onclick="
+              event.preventDefault();
+              showToast('Terms of Service coming soon');
+            "
+            >Terms of Service</a
+          >
+          |
+          <a
+            href="javascript:void(0)"
+            onclick="
+              event.preventDefault();
+              showToast('Contact page coming soon');
+            "
+            >Contact Us</a
+          >
+        </p>
+      </footer>
+    </div>
+
+    <!-- ===== AUTH OVERLAYS ===== -->
+    <div class="auth-overlay" id="authOverlay">
+      <div class="auth-box" id="loginBox" style="display: none">
+        <button class="auth-close" onclick="hideAuth()">×</button>
+        <div class="auth-brand">
+          <div class="auth-logo">PB</div>
+          <h2>Welcome Back</h2>
+          <p>Sign in to your Prestige Bank account</p>
+        </div>
+        <form class="auth-form" onsubmit="handleLogin(event)">
+          <div class="form-group">
+            <label>Username</label>
+            <input
+              type="text"
+              id="loginUsername"
+              value="theodorebagshaw"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input
+              type="password"
+              id="loginPassword"
+              value="password123"
+              required
+            />
+          </div>
+          <button type="submit" class="btn-full">Sign In</button>
+          <p class="auth-hint">Demo: theodorebagshaw / password123</p>
+          <p class="auth-switch">
+            Don't have an account? <a onclick="switchAuth('signup')">Sign Up</a>
+          </p>
+        </form>
+      </div>
+
+      <div class="auth-box" id="signupBox" style="display: none">
+        <button class="auth-close" onclick="hideAuth()">×</button>
+        <div class="auth-brand">
+          <div class="auth-logo">PB</div>
+          <h2>Create Account</h2>
+          <p>Join Prestige Bank today</p>
+        </div>
+        <form class="auth-form" onsubmit="handleSignup(event)">
+          <div class="form-group">
+            <label>Full Name</label>
+            <input
+              type="text"
+              id="signupName"
+              placeholder="Theodore Bagshaw"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input
+              type="email"
+              id="signupEmail"
+              placeholder="john@example.com"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Username</label>
+            <input
+              type="text"
+              id="signupUsername"
+              placeholder="theodorebagshaw"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input
+              type="password"
+              id="signupPassword"
+              placeholder="Create a password"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label>Account Type</label>
+            <select id="signupType">
+              <option>Personal Checking</option>
+              <option>Savings Account</option>
+              <option>Business Account</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-full">Create Account</button>
+          <p class="auth-switch">
+            Already have an account?
+            <a onclick="switchAuth('login')">Sign In</a>
+          </p>
+        </form>
+      </div>
+    </div>
+
+    <!-- ===== MAIN APP ===== -->
+    <div class="app" id="mainApp">
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+          <div class="brand-icon">PB</div>
+          <span class="brand-text">Prestige Bank</span>
+        </div>
+        <nav class="sidebar-nav">
+          <a
+            href="#"
+            class="nav-item active"
+            data-page="dashboard"
+            onclick="
+              event.preventDefault();
+              navigateTo('dashboard');
+            "
+          >
+            <svg
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+              />
+            </svg>
+            <span>Dashboard</span>
+          </a>
+          <a
+            href="javascript:void(0)"
+            class="nav-item"
+            data-page="accounts"
+            onclick="
+              event.preventDefault();
+              navigateTo('accounts');
+            "
+          >
+            <svg
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"
+              />
+            </svg>
+            <span>Accounts</span>
+          </a>
+          <a
+            href="javascript:void(0)"
+            class="nav-item"
+            data-page="cards"
+            onclick="
+              event.preventDefault();
+              navigateTo('cards');
+            "
+          >
+            <svg
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z"
+              />
+            </svg>
+            <span>Cards</span>
+          </a>
+          <a
+            href="javascript:void(0)"
+            class="nav-item"
+            data-page="transfer"
+            onclick="
+              event.preventDefault();
+              navigateTo('transfer');
+            "
+          >
+            <svg
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
+              />
+            </svg>
+            <span>Transfer</span>
+          </a>
+          <a
+            href="javascript:void(0)"
+            class="nav-item"
+            data-page="transactions"
+            onclick="
+              event.preventDefault();
+              navigateTo('transactions');
+            "
+          >
+            <svg
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+              />
+            </svg>
+            <span>Transactions</span>
+          </a>
+          <a
+            href="javascript:void(0)"
+            class="nav-item"
+            data-page="settings"
+            onclick="
+              event.preventDefault();
+              navigateTo('settings');
+            "
+          >
+            <svg
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+              />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+              />
+            </svg>
+            <span>Settings</span>
+          </a>
+        </nav>
+        <div class="sidebar-footer">
+          <div class="user-avatar">TB</div>
+          <div class="user-info">
+            <div class="user-name">Theodore Bagshaw</div>
+            <div class="user-tier">Premium Member</div>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div class="topbar-left">
+            <button class="menu-toggle" onclick="toggleSidebar()">
+              <svg
+                width="20"
+                height="20"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+            <h2 class="page-title" id="pageTitle">Dashboard</h2>
+          </div>
+          <div class="topbar-right">
+            <div class="search-box">
+              <svg
+                width="16"
+                height="16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+              <input type="text" placeholder="Search..." />
+            </div>
+            <button
+              class="icon-btn"
+              onclick="showToast('No new notifications')"
+            >
+              <svg
+                width="18"
+                height="18"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+                />
+              </svg>
+              <span class="badge">3</span>
+            </button>
+            <div
+              class="user-avatar"
+              onclick="showToast('Profile settings coming soon')"
+            >
+              TB
+            </div>
+          </div>
+        </header>
+        <div class="content" id="contentArea"></div>
+      </main>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">
+      <svg
+        width="18"
+        height="18"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M5 13l4 4L19 7"
+        />
+      </svg>
+      <span id="toastText">Action completed</span>
+    </div>
+
+    <script>
+      // ===== LANDING PAGE NAV SCROLL =====
+      window.addEventListener("scroll", () => {
+        const nav = document.getElementById("landingNav");
+        if (window.scrollY > 50) nav.classList.add("scrolled");
+        else nav.classList.remove("scrolled");
+      });
+
+      // ===== AUTH OVERLAY =====
+      function showAuth(type) {
+        const overlay = document.getElementById("authOverlay");
+        document.getElementById("loginBox").style.display =
+          type === "login" ? "block" : "none";
+        document.getElementById("signupBox").style.display =
+          type === "signup" ? "block" : "none";
+        overlay.classList.add("active");
+      }
+      function hideAuth() {
+        document.getElementById("authOverlay").classList.remove("active");
+      }
+      function switchAuth(type) {
+        document.getElementById("loginBox").style.display =
+          type === "login" ? "block" : "none";
+        document.getElementById("signupBox").style.display =
+          type === "signup" ? "block" : "none";
+      }
+
+      // ===== LOGIN =====
+      function handleLogin(e) {
+        e.preventDefault();
+        const user = document.getElementById("loginUsername").value;
+        const pass = document.getElementById("loginPassword").value;
+        if (user === "theodorebagshaw" && pass === "password123") {
+          document.getElementById("landingPage").style.display = "none";
+          document.getElementById("authOverlay").classList.remove("active");
+          document.getElementById("mainApp").classList.add("active");
+          showToast("Welcome back, Theodore!", "success");
+          renderDashboard();
+        } else {
+          showToast("Invalid credentials. Try theodorebagshaw / password123");
+        }
+      }
+
+      // ===== SIGNUP =====
+      function handleSignup(e) {
+        e.preventDefault();
+        const name = document.getElementById("signupName").value;
+        if (name) {
+          showToast("Account created successfully! Please sign in.", "success");
+          setTimeout(() => switchAuth("login"), 1500);
+        }
+      }
+
+      // ===== STATE =====
+      let balance = 1400000; // 1.4M USD
+      let transactions = [
+        {
+          id: 0,
+          name: "Hamburg Shipping Sud Group",
+          desc: "Payment Received",
+          amount: 470000.0,
+          date: "Sep 24, 2026",
+          status: "completed",
+          type: "income",
+          icon: "🚢",
+        },
+        {
+          id: 1,
+          name: "Netflix Subscription",
+          desc: "Entertainment",
+          amount: -15.99,
+          date: "Aug 28, 2026",
+          status: "completed",
+          type: "expense",
+          icon: "🎬",
+        },
+        {
+          id: 2,
+          name: "Salary Deposit",
+          desc: "City Corp Payroll",
+          amount: 5420.0,
+          date: "Aug 25, 2026",
+          status: "completed",
+          type: "income",
+          icon: "💼",
+        },
+        {
+          id: 3,
+          name: "Whole Foods Market",
+          desc: "Groceries",
+          amount: -127.45,
+          date: "Aug 24, 2026",
+          status: "completed",
+          type: "expense",
+          icon: "🛒",
+        },
+        {
+          id: 4,
+          name: "Uber Ride",
+          desc: "Transportation",
+          amount: -24.5,
+          date: "Aug 22, 2026",
+          status: "completed",
+          type: "expense",
+          icon: "🚗",
+        },
+        {
+          id: 5,
+          name: "Transfer from Savings",
+          desc: "Internal Transfer",
+          amount: 1000.0,
+          date: "Aug 20, 2026",
+          status: "completed",
+          type: "transfer",
+          icon: "↔️",
+        },
+        {
+          id: 6,
+          name: "Apple Store",
+          desc: "Electronics",
+          amount: -1299.0,
+          date: "Aug 18, 2026",
+          status: "pending",
+          type: "expense",
+          icon: "🍎",
+        },
+        {
+          id: 7,
+          name: "Freelance Payment",
+          desc: "Design Project",
+          amount: 850.0,
+          date: "Aug 15, 2026",
+          status: "completed",
+          type: "income",
+          icon: "🎨",
+        },
+        {
+          id: 8,
+          name: "Electric Bill",
+          desc: "Utilities",
+          amount: -142.3,
+          date: "Aug 12, 2026",
+          status: "completed",
+          type: "expense",
+          icon: "⚡",
+        },
+      ];
+
+      // ===== NAVIGATION =====
+      function navigateTo(page) {
+        document
+          .querySelectorAll(".nav-item")
+          .forEach((el) => el.classList.remove("active"));
+        document.querySelector(`[data-page="${page}"]`).classList.add("active");
+        document.getElementById("pageTitle").textContent =
+          page.charAt(0).toUpperCase() + page.slice(1);
+        const content = document.getElementById("contentArea");
+        content.innerHTML = "";
+        content.classList.remove("animate-in");
+        void content.offsetWidth;
+        content.classList.add("animate-in");
+        switch (page) {
+          case "dashboard":
+            renderDashboard();
+            break;
+          case "accounts":
+            renderAccounts();
+            break;
+          case "cards":
+            renderCards();
+            break;
+          case "transfer":
+            renderTransfer();
+            break;
+          case "transactions":
+            renderTransactions();
+            break;
+          case "settings":
+            renderSettings();
+            break;
+        }
+      }
+      function toggleSidebar() {
+        document.getElementById("sidebar").classList.toggle("open");
+      }
+
+      // ===== DASHBOARD =====
+      function renderDashboard() {
+        const income = transactions
+          .filter((t) => t.type === "income")
+          .reduce((a, b) => a + b.amount, 0);
+        const expense = Math.abs(
+          transactions
+            .filter((t) => t.type === "expense")
+            .reduce((a, b) => a + b.amount, 0),
+        );
+        document.getElementById("contentArea").innerHTML = `
+                <div class="dashboard">
+                    <div class="hero-banner">
+                        <div class="hero-content">
+                            <h2>Welcome back, Theodore! 👋</h2>
+                            <p>Your finances are looking great this month. You are on track to meet your savings goal.</p>
+                            <button class="btn" onclick="event.preventDefault(); navigateTo('transfer')">Send Money</button>
+                        </div>
+                    </div>
+                    <div class="cards-row">
+                        <div class="balance-card">
+                            <div class="label">Total Balance</div>
+                            <div class="amount">$1.4M USD</div>
+                            <div class="change">📈 +2.4% from last month</div>
+                            <div class="card-bottom"><span>**** 4821</span><span>Visa Platinum</span></div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div><div class="stat-label">Total Income</div><div class="stat-value">$500,890.00</div></div>
+                                <div class="stat-icon green">💰</div>
+                            </div>
+                            <div class="stat-change up">+12.5% vs last month</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-header">
+                                <div><div class="stat-label">Total Expenses</div><div class="stat-value">$0.000</div></div>
+                                <div class="stat-icon red">📉</div>
+                            </div>
+                            <div class="stat-change down">+5.2% vs last month</div>
+                        </div>
+                    </div>
+                    <div class="quick-actions">
+                        <div class="action-btn" onclick="showToast('Transfers are currently inactive on your account')">
+                            <div class="action-icon" style="background:#eff6ff;">💸</div><span>Send Money</span>
+                        </div>
+                        <div class="action-btn" onclick="showToast('Request feature coming soon')">
+                            <div class="action-icon" style="background:#ecfdf5;">📥</div><span>Request</span>
+                        </div>
+                        <div class="action-btn" onclick="showToast('Top-up feature coming soon')">
+                            <div class="action-icon" style="background:#fffbeb;">💳</div><span>Top Up</span>
+                        </div>
+                        <div class="action-btn" onclick="showToast('More options coming soon')">
+                            <div class="action-icon" style="background:#f3f4f6;">⋯</div><span>More</span>
+                        </div>
+                    </div>
+                    <div class="section">
+                        <div class="section-header">
+                            <h3>Recent Transactions</h3>
+                            <button class="btn" onclick="event.preventDefault(); navigateTo('transactions')">View All</button>
+                        </div>
+                        <table class="data-table">
+                            <thead><tr><th>Transaction</th><th>Date</th><th>Amount</th><th>Status</th></tr></thead>
+                            <tbody>${transactions
+                              .slice(0, 5)
+                              .map((t) => txRow(t))
+                              .join("")}</tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+      }
+
+      // ===== ACCOUNTS =====
+      function renderAccounts() {
+        document.getElementById("contentArea").innerHTML = `
+                <div class="dashboard">
+                    <div class="cards-row">
+                        <div class="balance-card" style="background:linear-gradient(135deg, #1a3a5c, #2a5a8c);">
+                            <div class="label">Checking Account</div>
+                            <div class="amount">$${balance.toFixed(2)}</div>
+                            <div class="card-bottom"><span>**** 4821</span><span>Primary</span></div>
+                        </div>
+                        <div class="balance-card" style="background:linear-gradient(135deg, #059669, #10b981);">
+                            <div class="label">Savings Account</div>
+                            <div class="amount">$${(balance * 0.65).toFixed(2)}</div>
+                            <div class="card-bottom"><span>**** 7392</span><span>High Yield 4.2% APY</span></div>
+                        </div>
+                        <div class="balance-card" style="background:linear-gradient(135deg, #7c3aed, #a78bfa);">
+                            <div class="label">Investment Account</div>
+                            <div class="amount">$12,450.80</div>
+                            <div class="card-bottom"><span>**** 1056</span><span>+8.3% YTD</span></div>
+                        </div>
+                    </div>
+                    <div class="section">
+                        <div class="section-header"><h3>Account Activity</h3></div>
+                        <table class="data-table">
+                            <thead><tr><th>Account</th><th>Type</th><th>Balance</th><th>Status</th></tr></thead>
+                            <tbody>
+                                <tr><td><div class="tx-name">Checking ****4821</div><div class="tx-desc">Primary account</div></td><td>Checking</td><td class="tx-amount income">$${balance.toFixed(2)}</td><td><span class="status completed">Active</span></td></tr>
+                                <tr><td><div class="tx-name">Savings ****7392</div><div class="tx-desc">High yield savings</div></td><td>Savings</td><td class="tx-amount income">$${(balance * 0.65).toFixed(2)}</td><td><span class="status completed">Active</span></td></tr>
+                                <tr><td><div class="tx-name">Investment ****1056</div><div class="tx-desc">Brokerage</div></td><td>Investment</td><td class="tx-amount income">$12,450.80</td><td><span class="status completed">Active</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+      }
+
+      // ===== CARDS =====
+      function renderCards() {
+        document.getElementById("contentArea").innerHTML = `
+                <div class="dashboard">
+                    <div class="cards-grid">
+                        <div class="credit-card gold">
+                            <div class="card-top"><div class="chip"></div><div class="card-type">VISA</div></div>
+                            <div class="card-number">**** **** **** 4821</div>
+                            <div class="card-bottom"><div><div style="font-size:10px;opacity:0.7;">CARD HOLDER</div><div style="font-weight:600;">THEODORE BAGSHAW</div></div><div><div style="font-size:10px;opacity:0.7;">EXPIRES</div><div style="font-weight:600;">09/28</div></div></div>
+                        </div>
+                        <div class="credit-card platinum">
+                            <div class="card-top"><div class="chip"></div><div class="card-type">VISA</div></div>
+                            <div class="card-number">**** **** **** 7392</div>
+                            <div class="card-bottom"><div><div style="font-size:10px;opacity:0.7;">CARD HOLDER</div><div style="font-weight:600;">THEODORE BAGSHAW</div></div><div><div style="font-size:10px;opacity:0.7;">EXPIRES</div><div style="font-weight:600;">12/27</div></div></div>
+                        </div>
+                    </div>
+                    <div class="section">
+                        <div class="section-header"><h3>Card Management</h3><button class="btn btn-primary" onclick="showToast('New card request submitted', 'success')">Request New Card</button></div>
+                        <div class="settings-list">
+                            <div class="setting-item"><div class="setting-info"><h4>Freeze Card</h4><p>Temporarily disable all transactions</p></div><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                            <div class="setting-item"><div class="setting-info"><h4>Online Payments</h4><p>Allow e-commerce transactions</p></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                            <div class="setting-item"><div class="setting-info"><h4>Contactless Payments</h4><p>Enable tap-to-pay</p></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                            <div class="setting-item"><div class="setting-info"><h4>International Usage</h4><p>Allow transactions abroad</p></div><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+      }
+
+      // ===== TRANSFER =====
+      function renderTransfer() {
+        document.getElementById("contentArea").innerHTML = `
+                <div class="section" style="max-width:600px;">
+                    <div class="section-header">
+                        <h3>Send Money</h3>
+                        <span class="status pending" style="background:#fef2f2;color:#991b1b;">Inactive</span>
+                    </div>
+                    <div style="padding:24px;">
+                        <div class="dashboard" style="gap:16px;">
+                            <div class="inactive-banner">
+                                <span class="dot"></span>
+                                <span>Transfers are currently inactive on your account. Please contact customer support for assistance.</span>
+                            </div>
+                            <div class="form-group">
+                                <label>From Account</label>
+                                <select disabled><option>Checking ****4821 — $${balance.toFixed(2)}</option><option>Savings ****7392 — $${(balance * 0.65).toFixed(2)}</option></select>
+                            </div>
+                            <div class="form-group"><label>Recipient Name</label><input type="text" id="recName" placeholder="e.g. Jane Doe" disabled></div>
+                            <div class="form-group"><label>Account Number</label><input type="text" id="recAccount" placeholder="Enter account number" disabled></div>
+                            <div class="form-group"><label>Amount</label><input type="number" id="txAmount" placeholder="0.00" step="0.01" disabled></div>
+                            <div class="form-group"><label>Note (Optional)</label><input type="text" placeholder="What's this for?" disabled></div>
+                            <button class="btn btn-primary btn-full btn-disabled" onclick="showToast('Transfers are currently inactive on your account')">Send Money (Inactive)</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+      }
+      function submitTransfer() {
+        showToast("Transfers are currently inactive on your account");
+        return;
+        const amount = parseFloat(document.getElementById("txAmount").value);
+        const name = document.getElementById("recName").value;
+        if (!amount || amount <= 0) {
+          showToast("Please enter a valid amount");
+          return;
+        }
+        if (!name) {
+          showToast("Please enter recipient name");
+          return;
+        }
+        if (amount > balance) {
+          showToast("Insufficient funds");
+          return;
+        }
+        balance -= amount;
+        transactions.unshift({
+          id: Date.now(),
+          name: `Transfer to ${name}`,
+          desc: "Bank Transfer",
+          amount: -amount,
+          date: new Date().toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          }),
+          status: "completed",
+          type: "expense",
+          icon: "💸",
+        });
+        showToast(
+          `Successfully sent $${amount.toFixed(2)} to ${name}`,
+          "success",
+        );
+        navigateTo("dashboard");
+        document
+          .querySelector('[data-page="dashboard"]')
+          .classList.add("active");
+      }
+
+      // ===== TRANSACTIONS =====
+      function renderTransactions() {
+        document.getElementById("contentArea").innerHTML = `
+                <div class="section">
+                    <div class="section-header">
+                        <h3>All Transactions</h3>
+                        <div style="display:flex; gap:8px;">
+                            <button class="btn" onclick="filterTx('all')">All</button>
+                            <button class="btn" onclick="filterTx('income')">Income</button>
+                            <button class="btn" onclick="filterTx('expense')">Expense</button>
+                        </div>
+                    </div>
+                    <table class="data-table" id="txTable">
+                        <thead><tr><th>Transaction</th><th>Date</th><th>Amount</th><th>Status</th></tr></thead>
+                        <tbody>${transactions.map((t) => txRow(t)).join("")}</tbody>
+                    </table>
+                </div>
+            `;
+      }
+      function filterTx(type) {
+        const tbody = document.querySelector("#txTable tbody");
+        const filtered =
+          type === "all"
+            ? transactions
+            : transactions.filter((t) => t.type === type);
+        tbody.innerHTML = filtered.map((t) => txRow(t)).join("");
+      }
+      function txRow(t) {
+        return `
+                <tr>
+                    <td><div style="display:flex; align-items:center; gap:12px;"><div class="tx-icon ${t.type}">${t.icon}</div><div><div class="tx-name">${t.name}</div><div class="tx-desc">${t.desc}</div></div></div></td>
+                    <td style="color:var(--text-light);">${t.date}</td>
+                    <td class="tx-amount ${t.type}">${t.amount > 0 ? "+" : ""}$${Math.abs(t.amount).toFixed(2)}</td>
+                    <td><span class="status ${t.status}">${t.status}</span></td>
+                </tr>
+            `;
+      }
+
+      // ===== SETTINGS =====
+      function renderSettings() {
+        document.getElementById("contentArea").innerHTML = `
+                <div style="display:flex; flex-direction:column; gap:20px; max-width:700px;">
+                    <div class="section">
+                        <div class="section-header"><h3>Preferences</h3></div>
+                        <div class="settings-list">
+                            <div class="setting-item"><div class="setting-info"><h4>Push Notifications</h4><p>Receive alerts for transactions</p></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                            <div class="setting-item"><div class="setting-info"><h4>Email Alerts</h4><p>Get monthly statements via email</p></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
+                            <div class="setting-item"><div class="setting-info"><h4>Biometric Login</h4><p>Use fingerprint or face ID</p></div><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                            <div class="setting-item"><div class="setting-info"><h4>Dark Mode</h4><p>Switch to dark theme</p></div><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
+                        </div>
+                    </div>
+                    <div class="section">
+                        <div class="section-header"><h3>Security</h3></div>
+                        <div class="settings-list">
+                            <div class="setting-item clickable" onclick="showToast('Change password modal would open')"><div class="setting-info"><h4>Change Password</h4><p>Last changed 30 days ago</p></div><span>→</span></div>
+                            <div class="setting-item clickable" onclick="showToast('Login history would open')"><div class="setting-info"><h4>Login History</h4><p>View recent account access</p></div><span>→</span></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+      }
+
+      // ===== UTILS =====
+      function showToast(msg, type = "") {
+        const toast = document.getElementById("toast");
+        document.getElementById("toastText").textContent = msg;
+        toast.className = "toast show " + type;
+        setTimeout(() => toast.classList.remove("show"), 3000);
+      }
+
+      document.addEventListener("click", (e) => {
+        const sidebar = document.getElementById("sidebar");
+        const toggle = document.querySelector(".menu-toggle");
+        if (
+          window.innerWidth <= 768 &&
+          sidebar.classList.contains("open") &&
+          !sidebar.contains(e.target) &&
+          !toggle.contains(e.target)
+        ) {
+          sidebar.classList.remove("open");
+        }
+      });
+    </script>
+  </body>
+</html>
